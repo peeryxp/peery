@@ -1,0 +1,27 @@
+/**
+ * Remove specific billing (and/or shipping) fields from WooCommerce checkout.
+ */
+function custom_remove_woo_checkout_fields( $fields ) {
+    // Remove from Billing
+    unset( $fields['billing']['billing_country'] );      // Country/Region
+    unset( $fields['billing']['billing_address_1'] );    // Street address
+    unset( $fields['billing']['billing_address_2'] );    // Apartment, suite, etc.
+    unset( $fields['billing']['billing_city'] );         // Town/City
+    unset( $fields['billing']['billing_state'] );        // State
+    unset( $fields['billing']['billing_postcode'] );     // ZIP Code
+    unset( $fields['billing']['billing_phone'] );        // Phone
+
+    // If you want to remove shipping fields, uncomment below:
+    /*
+    unset( $fields['shipping']['shipping_country'] );
+    unset( $fields['shipping']['shipping_address_1'] );
+    unset( $fields['shipping']['shipping_address_2'] );
+    unset( $fields['shipping']['shipping_city'] );
+    unset( $fields['shipping']['shipping_state'] );
+    unset( $fields['shipping']['shipping_postcode'] );
+    unset( $fields['shipping']['shipping_phone'] );
+    */
+
+    return $fields;
+}
+add_filter( 'woocommerce_checkout_fields', 'custom_remove_woo_checkout_fields', 9999 );
